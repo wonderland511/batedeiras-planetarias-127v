@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="color-scheme" content="dark light">
+<title>Тестомес для дома</title>
+<style>
+:root{
+  --bg:#0b0b0c; --bg2:#141416; --card:#18181b; --line:#2a2a2e; --text:#f5f5f7; --muted:#a1a1a6;
+  --accent:#f5a524; --accent-ink:#1a1204; --good:#30d158; --bad:#ff6961; --photo:#ffffff;
+  --top-glow:rgba(245,165,36,.18); --radius:22px;
+}
+@media (prefers-color-scheme: light){
+  :root{ --bg:#f5f5f7; --bg2:#ececf0; --card:#ffffff; --line:#e3e3e8; --text:#1d1d1f; --muted:#6e6e73;
+    --accent:#c26d00; --accent-ink:#ffffff; --good:#1f8f3a; --bad:#d63a2f; --top-glow:rgba(194,109,0,.12); }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+@keyframes fadeInUp{ from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
+.reveal{animation:fadeInUp .6s ease-out both}
+.reveal.d1{animation-delay:.08s}.reveal.d2{animation-delay:.16s}.reveal.d3{animation-delay:.24s}.reveal.d4{animation-delay:.32s}
+@media (prefers-reduced-motion: reduce){ .reveal{animation:none;opacity:1;transform:none} }
+
+/* hero */
+header.hero{padding:64px 0 28px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.05;letter-spacing:-.025em;margin:12px 0 14px;font-weight:700}
+.lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:760px;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{border:1px solid var(--line);background:var(--bg2);border-radius:999px;padding:7px 14px;font-size:14px;color:var(--text)}
+
+/* verdict */
+.verdict{margin:26px 0 8px;border-radius:var(--radius);padding:26px;background:linear-gradient(135deg,var(--top-glow),transparent 70%),var(--card);border:1px solid var(--line);display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:center}
+.verdict img{width:200px;height:200px;object-fit:contain;background:var(--photo);border-radius:18px;padding:10px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:13px;letter-spacing:.02em;padding:6px 12px;border-radius:999px}
+.verdict h2{font-size:clamp(24px,3.4vw,32px);letter-spacing:-.02em;margin:10px 0 8px;line-height:1.15}
+.verdict p{margin:0 0 10px;color:var(--muted)}
+.verdict ul{margin:6px 0 14px;padding-left:20px}
+.verdict li{margin:3px 0}
+@media (max-width:720px){ .verdict{grid-template-columns:1fr;padding:20px} .verdict img{width:100%;height:220px} }
+
+.note{margin:18px 0 0;border-radius:18px;padding:18px 20px;background:var(--bg2);border:1px solid var(--line);font-size:15.5px}
+.note b{color:var(--text)}
+.note p{margin:6px 0}
+
+/* section */
+section{padding:44px 0 8px}
+h2.sec{font-size:clamp(26px,3.6vw,36px);letter-spacing:-.02em;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 22px}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media (max-width:860px){ .grid{grid-template-columns:1fr} }
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.card.top{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 20px 50px -20px var(--top-glow)}
+.card .body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card h3{margin:0;font-size:22px;letter-spacing:-.015em;line-height:1.2}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tag.ok{color:var(--good);border-color:color-mix(in srgb,var(--good) 40%,transparent)}
+.tag.no{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 40%,transparent)}
+.tag.acc{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price .rs{font-size:30px;font-weight:700;letter-spacing:-.02em}
+.price .usd{color:var(--muted);font-size:16px}
+.pmeta{font-size:14.5px;color:var(--muted);margin-top:-6px}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.spec{background:var(--bg2);border-radius:14px;padding:10px 12px}
+.spec small{display:block;color:var(--muted);font-size:12px}
+.spec span{font-weight:600;font-size:15px}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){ .pc{grid-template-columns:1fr} .specs{grid-template-columns:repeat(2,1fr)} }
+.pc h4{margin:0 0 6px;font-size:14px;text-transform:uppercase;letter-spacing:.05em}
+.pc .plus h4{color:var(--good)} .pc .minus h4{color:var(--bad)}
+.pc ul{margin:0;padding:0;list-style:none}
+.pc li{position:relative;padding-left:20px;margin:6px 0;font-size:15px;line-height:1.45}
+.pc .plus li::before{content:"+";position:absolute;left:2px;color:var(--good);font-weight:700}
+.pc .minus li::before{content:"−";position:absolute;left:2px;color:var(--bad);font-weight:700}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px;border-radius:14px;font-weight:600;text-decoration:none;font-size:16px;border:1px solid var(--line);background:var(--bg2);transition:background .2s,border-color .2s}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);flex:1 1 220px}
+.btn:hover{border-color:var(--accent)}
+.btn:focus-visible,.cbtn:focus-visible,.lb button:focus-visible,.slide:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* carousel */
+.car{position:relative;background:var(--photo)}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:center;aspect-ratio:1/1;max-height:440px;display:flex;align-items:center;justify-content:center;border:0;background:transparent;padding:0;cursor:zoom-in}
+.slide img{width:100%;height:100%;object-fit:contain;display:block}
+.cbtn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cbtn.prev{left:10px}.cbtn.next{right:10px}
+.counter{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.6);color:#fff;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px}
+.zoomhint{position:absolute;left:12px;bottom:12px;background:rgba(0,0,0,.6);color:#fff;font-size:12.5px;padding:4px 10px;border-radius:999px}
+.toplabel{position:absolute;left:12px;top:12px;z-index:2}
+
+/* table */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:15px}
+th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--bg2);position:sticky;top:0}
+tbody th{font-weight:600;color:var(--muted);white-space:nowrap}
+tr:last-child td,tr:last-child th{border-bottom:0}
+td.best{background:var(--top-glow)}
+.ok{color:var(--good);font-weight:600}.no{color:var(--bad);font-weight:600}
+
+/* sticker */
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.sticker{width:112px;height:112px;flex:0 0 auto;border-radius:50%;border:4px solid #fff;box-shadow:0 8px 24px rgba(0,0,0,.35);object-fit:cover;transform:rotate(-6deg);margin-bottom:14px}
+@media (max-width:520px){ .sticker{width:86px;height:86px} }
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center}
+.lb.open{display:flex}
+.lb figure{margin:0;max-width:min(92vw,1000px);max-height:86vh;display:flex;flex-direction:column;align-items:center;gap:10px}
+.lb img{max-width:100%;max-height:78vh;object-fit:contain;background:#fff;border-radius:14px}
+.lb figcaption{color:#ddd;font-size:14px}
+.lb button{position:absolute;border:0;background:rgba(255,255,255,.14);color:#fff;width:52px;height:52px;border-radius:50%;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lb .x{top:16px;right:16px}.lb .l{left:16px;top:50%;transform:translateY(-50%)}.lb .r{right:16px;top:50%;transform:translateY(-50%)}
+@media (max-width:520px){ .lb .l{left:6px}.lb .r{right:6px} .lb button{width:44px;height:44px} }
+
+footer{padding:40px 0 60px;color:var(--muted);font-size:13.5px}
+footer p{margin:6px 0}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal">Планетарный миксер · 110V (127V) · доставка по Бразилии</div>
+    <h1 class="reveal d1">Тестомес для дома: что брать до R$ 600</h1>
+    <p class="lead reveal d2">Задача: месить тесто на хлеб, пирожки, пиццу и булочки, а ещё взбивать кремы и делать бисквит. Нужна хорошая домашняя машина, не профессиональная. Сравниваю четыре модели по вашим ссылкам. Цены проверены 18.11.2026 напрямую в магазинах.</p>
+    <div class="chips reveal d3">
+      <span class="chip">Бюджет R$ 500–600 ≈ $86–103</span>
+      <span class="chip">Напряжение 110V (в Бразилии это 127V)</span>
+      <span class="chip">Курс ЦБ Бразилии (PTAX): R$ 5,8102 за $1 на 18.11.2026</span>
+    </div>
+
+    <div class="verdict reveal d4">
+      <img src="img/o641-1.jpg" alt="Oster OBAT641" referrerpolicy="no-referrer">
+      <div>
+        <span class="badge">★ Лучший выбор в бюджете</span>
+        <h2>Oster OBAT641: R$ 419 по Pix ≈ $72</h2>
+        <p>С доставкой R$ 9,90 выходит R$ 428,90 ≈ $74. Остаётся около R$ 170 от бюджета.</p>
+        <ul>
+          <li><b>Самая мощная в бюджете:</b> 850 Вт, есть версия 127V.</li>
+          <li><b>Берёт больше теста:</b> в инструкции Oster есть рецепт хлеба на <b>800 г муки</b> (2 буханки), его месят крюком 4 минуты. Electrolux EKM40 по своей инструкции берёт максимум 500 г муки за раз.</li>
+          <li>Чаша из нержавейки на 4 л. В комплекте 3 насадки: венчик для белков и крема, лопатка для бисквита и печенья, крюк для хлеба и пиццы. Есть крышка от брызг и мерный стаканчик.</li>
+        </ul>
+        <div class="btns" style="margin-top:0">
+          <a class="btn primary" href="https://site.fastshop.com.br/batedeira-planetaria-oster-com-03-batedores-preta---obat641-osobat641pto_prd/p?skuId=14851" target="_blank" rel="noopener">Купить в Fast Shop · 110V</a>
+          <a class="btn" href="#oster641">Подробнее ↓</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="note reveal d4">
+      <p><b>Честно про насадки.</b> Ни у одной модели за R$ 500–600 нет разъёма для дополнительных насадок вроде мясорубки, тёрки или машинки для пасты. В бюджете у вас будут три стандартные насадки: венчик, лопатка и крюк. Для теста, кремов и бисквита их хватает.</p>
+      <p>Если нужны именно дополнительные насадки, то самая доступная модель с таким разъёмом — <b>Electrolux KMP70</b>. Она стоит R$ 1.073,40 по Pix ≈ $185, а мясорубка к ней ещё R$ 417,90 ≈ $72. Это почти втрое больше бюджета.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="models">
+  <h2 class="sec reveal">Четыре модели</h2>
+  <p class="sub reveal d1">Нажмите на фото, чтобы увеличить. Листать можно свайпом, стрелками или клавишами ← →.</p>
+
+  <div class="grid">
+
+    <!-- OSTER OBAT641 -->
+    <article class="card top reveal" id="oster641" data-name="Oster OBAT641">
+      <div class="car">
+        <span class="badge toplabel">★ Лучший выбор</span>
+        <div class="track">
+          <button class="slide" type="button"><img src="img/o641-1.jpg" alt="Oster OBAT641, вид спереди" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o641-2.jpg" alt="Oster OBAT641, три насадки" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o641-3.jpg" alt="Oster OBAT641, чаша из нержавейки 4 л" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o641-4.jpg" alt="Oster OBAT641, крышка от брызг" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o641-5.jpg" alt="Oster OBAT641, мотор 850 Вт" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o641-6.jpg" alt="Oster OBAT641, размеры" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o641-7.jpg" alt="Oster OBAT641, присоски на основании" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o641-8.jpg" alt="Oster OBAT641, мерный стаканчик" loading="lazy" referrerpolicy="no-referrer"></button>
+        </div>
+      </div>
+      <div class="body">
+        <h3>Oster OBAT641 (Bowl Inox III)</h3>
+        <div class="tagrow"><span class="tag acc">Лучший выбор</span><span class="tag ok">В бюджете</span><span class="tag ok">Есть 127V</span><span class="tag">Без разъёма для насадок</span></div>
+        <div class="price"><span class="rs">R$ 419</span><span class="usd">по Pix ≈ $72</span></div>
+        <div class="pmeta">Картой R$ 445,74 ≈ $77 · Fast Shop · доставка R$ 9,90: Рио — 4 раб. дня, Сан-Паулу — 1 день</div>
+        <div class="specs">
+          <div class="spec"><small>Мощность</small><span>850 Вт</span></div>
+          <div class="spec"><small>Чаша</small><span>4 л, инокс</span></div>
+          <div class="spec"><small>Скорости</small><span>12 + плавный старт</span></div>
+          <div class="spec"><small>Вес</small><span>3,8–3,96 кг</span></div>
+          <div class="spec"><small>Тесто за раз</small><span>800 г муки*</span></div>
+          <div class="spec"><small>Гарантия</small><span>12 мес.</span></div>
+        </div>
+        <div class="pc">
+          <div class="plus"><h4>Плюсы</h4><ul>
+            <li>Самая мощная в бюджете: 850 Вт.</li>
+            <li>*В инструкции Oster есть рецепт хлеба на 800 г муки и 440 мл воды, месить крюком на скорости до 8 в течение 4 минут.</li>
+            <li>Чаша из нержавейки с ручками, крышка от брызг с отверстием для подсыпки, мерный стаканчик.</li>
+            <li>Плавный старт, поэтому мука не разлетается. Присоски на основании держат машину на месте.</li>
+            <li>Самая дешёвая из четырёх: R$ 419 по Pix.</li>
+          </ul></div>
+          <div class="minus"><h4>Минусы</h4><ul>
+            <li>Чаша 4 л, у остальных моделей 5 л.</li>
+            <li>Крюк и лопатка из алюминия, по инструкции их нельзя мыть в посудомойке.</li>
+            <li>Нет разъёма для мясорубки, тёрки или насадки для пасты.</li>
+            <li>Крюк можно включать только до 8-й скорости, иначе по инструкции перегружается мотор.</li>
+            <li>Машина лёгкая, поэтому на крутом тесте её держат только присоски.</li>
+          </ul></div>
+        </div>
+        <div class="btns">
+          <a class="btn primary" href="https://site.fastshop.com.br/batedeira-planetaria-oster-com-03-batedores-preta---obat641-osobat641pto_prd/p?skuId=14851" target="_blank" rel="noopener">Fast Shop · R$ 419</a>
+          <a class="btn" href="https://www.magazineluiza.com.br/batedeira-planetaria-oster-4l-850w-preto-inox-127v-obat641-127/p/hbd10bc559/ep/btdc/" target="_blank" rel="noopener">Magalu (ваша ссылка)</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ELECTROLUX EKM40 -->
+    <article class="card reveal d1" id="ekm40" data-name="Electrolux EKM40">
+      <div class="car">
+        <div class="track">
+          <button class="slide" type="button"><img src="img/ekm40-1.jpg" alt="Electrolux EKM40 с насадками" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/ekm40-2.jpg" alt="Electrolux EKM40, ракурс сбоку" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/ekm40-3.jpg" alt="Electrolux EKM40, вид спереди" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/ekm40-4.jpg" alt="Electrolux EKM40 с поднятой головой" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/ekm40-5.jpg" alt="Electrolux EKM40, ракурс" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/ekm40-6.jpg" alt="Electrolux EKM40, размеры" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/ekm40-7.jpg" alt="Electrolux EKM40 на кухне" loading="lazy" referrerpolicy="no-referrer"></button>
+        </div>
+      </div>
+      <div class="body">
+        <h3>Electrolux EKM40 Experience</h3>
+        <div class="tagrow"><span class="tag ok">В бюджете</span><span class="tag ok">Есть 127V</span><span class="tag ok">Доставка бесплатно</span><span class="tag">Без разъёма для насадок</span></div>
+        <div class="price"><span class="rs">R$ 446</span><span class="usd">≈ $77</span></div>
+        <div class="pmeta">Одна цена для Pix и карты, или 10 платежей по R$ 44,60 без переплаты · магазин Electrolux · доставка бесплатная: Рио — 8 раб. дней, Сан-Паулу — 7</div>
+        <div class="specs">
+          <div class="spec"><small>Мощность</small><span>750 Вт</span></div>
+          <div class="spec"><small>Чаша</small><span>5 л, инокс</span></div>
+          <div class="spec"><small>Скорости</small><span>12 + Pulse</span></div>
+          <div class="spec"><small>Вес</small><span>3,85 кг</span></div>
+          <div class="spec"><small>Тесто за раз</small><span>до 500 г муки</span></div>
+          <div class="spec"><small>Гарантия</small><span>1 год</span></div>
+        </div>
+        <div class="pc">
+          <div class="plus"><h4>Плюсы</h4><ul>
+            <li>Чаша из нержавейки на 5 л, в неё помещается большая партия крема или бисквита.</li>
+            <li>Насадки можно мыть в посудомойке, пластик без BPA.</li>
+            <li>12 скоростей, Pulse и плавный старт, есть защитная блокировка.</li>
+            <li>Бесплатная доставка из официального магазина.</li>
+          </ul></div>
+          <div class="minus"><h4>Минусы</h4><ul>
+            <li>По инструкции берёт максимум 500 г муки (800 г теста) за раз, это заметно меньше, чем у Oster.</li>
+            <li>Тяжёлое тесто можно месить не больше 7 минут подряд, потом машине нужно 20 минут остывать.</li>
+            <li>В характеристиках магазина указано, что другие насадки не подходят.</li>
+            <li>Мощность 750 Вт, машина лёгкая: 3,85 кг.</li>
+          </ul></div>
+        </div>
+        <div class="btns">
+          <a class="btn primary" href="https://loja.electrolux.com.br/batedeira-planetaria-electrolux-750w-cinza-experience-com-tigela-inox-5l--ekm40-/p?skuId=310119112" target="_blank" rel="noopener">Electrolux · R$ 446</a>
+          <a class="btn" href="https://www.magazineluiza.com.br/batedeira-planetaria-electrolux-750w-cinza-experience-com-tigela-inox-5l-ekm40/p/kf04a1ag2f/ep/btdc/?seller_id=electrolux" target="_blank" rel="noopener">Magalu (ваша ссылка)</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ELECTROLUX KMP70 -->
+    <article class="card reveal d2" id="kmp70" data-name="Electrolux KMP70">
+      <div class="car">
+        <div class="track">
+          <button class="slide" type="button"><img src="img/kmp70-1.jpg" alt="Electrolux KMP70, вид сбоку" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/kmp70-2.jpg" alt="Electrolux KMP70, ракурс" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/kmp70-3.jpg" alt="Electrolux KMP70 с поднятой головой и насадками" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/kmp70-4.jpg" alt="Electrolux KMP70, вид спереди" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/kmp70-5.jpg" alt="Electrolux KMP70, венчик в чаше" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/kmp70-6.jpg" alt="Electrolux KMP70, размеры" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/kmp70-7.jpg" alt="Electrolux KMP70 на кухне" loading="lazy" referrerpolicy="no-referrer"></button>
+        </div>
+      </div>
+      <div class="body">
+        <h3>Electrolux KMP70 Expert</h3>
+        <div class="tagrow"><span class="tag no">В 2 раза дороже бюджета</span><span class="tag ok">Есть 127V</span><span class="tag ok">Разъём для насадок</span></div>
+        <div class="price"><span class="rs">R$ 1.073,40</span><span class="usd">по Pix ≈ $185</span></div>
+        <div class="pmeta">Картой R$ 1.129,90 ≈ $194 (Amazon и магазин Electrolux) · доставка бесплатная: Рио — 8 раб. дней, Сан-Паулу — 7 · Amazon: 4,6 из 5 (21 отзыв)</div>
+        <div class="specs">
+          <div class="spec"><small>Мощность</small><span>800 Вт</span></div>
+          <div class="spec"><small>Чаша</small><span>5 л</span></div>
+          <div class="spec"><small>Скорости</small><span>6 + Pulse</span></div>
+          <div class="spec"><small>Вес</small><span>7,0 кг</span></div>
+          <div class="spec"><small>Тесто за раз</small><span>до 500 г муки</span></div>
+          <div class="spec"><small>Гарантия</small><span>1 год</span></div>
+        </div>
+        <div class="pc">
+          <div class="plus"><h4>Плюсы</h4><ul>
+            <li>Есть разъём для насадок. В магазине Electrolux: мясорубка R$ 417,90 (≈ $72), тёрка-слайсер R$ 229,90 (≈ $40), соковыжималка R$ 329,90 (≈ $57), насадка для пасты R$ 1.399,90 (≈ $241).</li>
+            <li>Весит 7 кг, поэтому стоит устойчиво.</li>
+            <li>Тяжёлое тесто можно месить до 10 минут подряд, у EKM40 только 7.</li>
+            <li>В характеристиках заявлен «умный» контроль скорости.</li>
+          </ul></div>
+          <div class="minus"><h4>Минусы</h4><ul>
+            <li>Стоит почти вдвое больше вашего бюджета, а с мясорубкой выходит R$ 1.547,80 ≈ $266.</li>
+            <li>По инструкции берёт за раз столько же муки, сколько EKM40: 500 г (830 г теста).</li>
+            <li>Только 6 скоростей.</li>
+            <li>Материал чаши в магазине указан по-разному: в описании нержавейка, в таблице характеристик алюминий с покрытием.</li>
+          </ul></div>
+        </div>
+        <div class="btns">
+          <a class="btn primary" href="https://loja.electrolux.com.br/batedeira-planetaria-electrolux-expert-kmp70-/p?skuId=310119106" target="_blank" rel="noopener">Electrolux · R$ 1.073,40 Pix</a>
+          <a class="btn" href="https://www.amazon.com.br/dp/B09SVS68SQ" target="_blank" rel="noopener">Amazon (ваша ссылка)</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- OSTER OBAT911 -->
+    <article class="card reveal d3" id="obat911" data-name="Oster OBAT911">
+      <div class="car">
+        <div class="track">
+          <button class="slide" type="button"><img src="img/o911-1.jpg" alt="Oster OBAT911, вид сбоку" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o911-2.jpg" alt="Oster OBAT911, вид спереди" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o911-3.jpg" alt="Oster OBAT911 с поднятой головой" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o911-4.jpg" alt="Oster OBAT911 и три насадки" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o911-5.jpg" alt="Oster OBAT911 на кухне" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o911-6.jpg" alt="Oster OBAT911 на кухне с тестом" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o911-7.jpg" alt="Oster OBAT911, дисплей и разъём для насадок" loading="lazy" referrerpolicy="no-referrer"></button>
+          <button class="slide" type="button"><img src="img/o911-8.jpg" alt="Oster OBAT911, основание чаши" loading="lazy" referrerpolicy="no-referrer"></button>
+        </div>
+      </div>
+      <div class="body">
+        <h3>Oster OBAT911 (Digital Bowl Inox 5L)</h3>
+        <div class="tagrow"><span class="tag no">В 2,5 раза дороже бюджета</span><span class="tag ok">Есть 127V</span><span class="tag ok">Разъём для насадок</span></div>
+        <div class="price"><span class="rs">R$ 1.367,91</span><span class="usd">по Pix ≈ $235</span></div>
+        <div class="pmeta">Картой R$ 1.554,44 ≈ $268 · Fast Shop, продавец-партнёр Webcontinental · в Рио доставка не оформилась, в Сан-Паулу R$ 53,27 и 11 раб. дней · на сайте Oster версии 127V нет в наличии</div>
+        <div class="specs">
+          <div class="spec"><small>Мощность</small><span>1000 Вт</span></div>
+          <div class="spec"><small>Чаша</small><span>5 л, инокс</span></div>
+          <div class="spec"><small>Скорости</small><span>8 + Pulse</span></div>
+          <div class="spec"><small>Вес</small><span>6,75 кг</span></div>
+          <div class="spec"><small>Таймер</small><span>есть, дисплей</span></div>
+          <div class="spec"><small>Гарантия</small><span>12 мес.</span></div>
+        </div>
+        <div class="pc">
+          <div class="plus"><h4>Плюсы</h4><ul>
+            <li>Самая мощная из четырёх: 1000 Вт.</li>
+            <li>Цифровой дисплей с таймером, можно задать время замеса и отойти.</li>
+            <li>Подсветка чаши, высоту чаши можно регулировать под маленькие порции.</li>
+            <li>Насадки на сайте Oster: мясорубка R$ 479,90 (≈ $83), слайсер Salada Maker R$ 329,90 (≈ $57).</li>
+          </ul></div>
+          <div class="minus"><h4>Минусы</h4><ul>
+            <li>Стоит в 2,5 раза больше бюджета.</li>
+            <li>Продаёт не сама Fast Shop, а продавец-партнёр. В Рио доставку оформить не удалось.</li>
+            <li>Скоростей меньше: 8 против 12 у моделей в бюджете.</li>
+            <li>Сколько муки она берёт за раз и сколько может месить без перерыва, проверить не удалось: инструкции к ней я не нашла.</li>
+          </ul></div>
+        </div>
+        <div class="btns">
+          <a class="btn primary" href="https://site.fastshop.com.br/batedeira-planetaria-oster-vermelha-127v-obat911-127-49589/p" target="_blank" rel="noopener">Fast Shop (ваша ссылка)</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="compare">
+  <div class="sec-head">
+    <div>
+      <h2 class="sec reveal">Сравнение в одной таблице</h2>
+      <p class="sub reveal d1">Цены на 18.11.2026, пересчёт в доллары по курсу R$ 5,8102 за $1.</p>
+    </div>
+    <img class="sticker" src="img/kotik.jpg" alt="Смешной котик прячется в пластиковом контейнере" width="112" height="112">
+  </div>
+  <div class="tbl-wrap reveal d2">
+    <table>
+      <thead><tr><th></th><th>Oster OBAT641 ★</th><th>Electrolux EKM40</th><th>Electrolux KMP70</th><th>Oster OBAT911</th></tr></thead>
+      <tbody>
+        <tr><th>Цена по Pix</th><td class="best"><b>R$ 419</b> ≈ $72</td><td>R$ 446 ≈ $77</td><td>R$ 1.073,40 ≈ $185</td><td>R$ 1.367,91 ≈ $235</td></tr>
+        <tr><th>В бюджет до R$ 600</th><td class="best ok">Да</td><td class="ok">Да</td><td class="no">Нет</td><td class="no">Нет</td></tr>
+        <tr><th>Доставка</th><td class="best">R$ 9,90</td><td>Бесплатно</td><td>Бесплатно</td><td>R$ 53,27 (СП), в Рио не оформилась</td></tr>
+        <tr><th>Мощность</th><td class="best">850 Вт</td><td>750 Вт</td><td>800 Вт</td><td>1000 Вт</td></tr>
+        <tr><th>Чаша</th><td class="best">4 л, нержавейка</td><td>5 л, нержавейка</td><td>5 л</td><td>5 л, нержавейка</td></tr>
+        <tr><th>Мука за раз (по инструкции)</th><td class="best"><b>800 г</b> (рецепт хлеба)</td><td>до 500 г</td><td>до 500 г</td><td>—</td></tr>
+        <tr><th>Тяжёлое тесто без перерыва</th><td class="best">не указано</td><td>до 7 мин</td><td>до 10 мин</td><td>—</td></tr>
+        <tr><th>Скорости</th><td class="best">12 + плавный старт</td><td>12 + Pulse</td><td>6 + Pulse</td><td>8 + Pulse, таймер</td></tr>
+        <tr><th>Вес</th><td class="best">3,8–3,96 кг</td><td>3,85 кг</td><td>7,0 кг</td><td>6,75 кг</td></tr>
+        <tr><th>Разъём для насадок</th><td class="best no">Нет</td><td class="no">Нет</td><td class="ok">Есть</td><td class="ok">Есть</td></tr>
+        <tr><th>В комплекте</th><td class="best">венчик, лопатка, крюк, крышка, мерный стакан</td><td>венчик, лопатка, крюк, крышка</td><td>венчик, лопатка, крюк, крышка</td><td>венчик, лопатка, крюк, крышка</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note reveal d3">
+    <p><b>Если подождать Чёрную пятницу (27.11.2026).</b> Oster OBAT641 и Electrolux EKM40 и сейчас укладываются в бюджет, ждать ради них не нужно. Ждать есть смысл, только если очень нужна модель с разъёмом для насадок. Но чтобы KMP70 уложилась в R$ 600, она должна подешеветь почти вдвое, и на такую скидку рассчитывать не стоит.</p>
+    <p><b>Про напряжение:</b> «110V» в Бразилии — это сеть 127V. При заказе выбирайте вариант 127V/110V, а не 220V. Ссылки на Fast Shop и Electrolux ведут на версию 110V, но перед оплатой всё равно проверьте напряжение.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Цены и доставка проверены 18.11.2026 в Fast Shop, магазине Electrolux и на Amazon.com.br. Доставку проверяла для Рио-де-Жанейро (CEP 22071-000) и Сан-Паулу (CEP 01310-100). Цены на Magalu не проверены: сайт блокирует автоматический доступ.</p>
+    <p>Стикер: «Cat in Tupperware container», автор gerriet, CC BY 2.0, Wikimedia Commons.</p>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр фото">
+  <button class="x" type="button" aria-label="Закрыть">×</button>
+  <button class="l" type="button" aria-label="Предыдущее фото">‹</button>
+  <figure><img alt=""><figcaption></figcaption></figure>
+  <button class="r" type="button" aria-label="Следующее фото">›</button>
+</div>
+
+<script>
+(function(){
+  // Карусели: стрелки, счётчик, клавиши
+  document.querySelectorAll('.car').forEach(function(car){
+    var track = car.querySelector('.track');
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+    var n = slides.length;
+    var counter = document.createElement('span'); counter.className='counter'; car.appendChild(counter);
+    var hint = document.createElement('span'); hint.className='zoomhint'; hint.textContent='Нажмите, чтобы увеличить'; car.appendChild(hint);
+    var prev = document.createElement('button'); prev.className='cbtn prev'; prev.type='button'; prev.setAttribute('aria-label','Предыдущее фото'); prev.textContent='‹';
+    var next = document.createElement('button'); next.className='cbtn next'; next.type='button'; next.setAttribute('aria-label','Следующее фото'); next.textContent='›';
+    car.appendChild(prev); car.appendChild(next);
+    function idx(){ return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); }
+    function go(i){ i=(i+n)%n; track.scrollTo({left:i*track.clientWidth, behavior:'smooth'}); }
+    function upd(){ counter.textContent=(idx()+1)+' / '+n; }
+    prev.addEventListener('click', function(){ go(idx()-1); });
+    next.addEventListener('click', function(){ go(idx()+1); });
+    track.addEventListener('scroll', function(){ window.requestAnimationFrame(upd); }, {passive:true});
+    track.tabIndex = 0;
+    track.addEventListener('keydown', function(e){ if(e.key==='ArrowLeft'){e.preventDefault();go(idx()-1);} if(e.key==='ArrowRight'){e.preventDefault();go(idx()+1);} });
+    upd();
+    slides.forEach(function(s,i){
+      var img=s.querySelector('img');
+      img.addEventListener('error', function(){ s.style.display='none'; });
+      s.addEventListener('click', function(){ openLb(slides.map(function(x){return x.querySelector('img');}), i, car.closest('.card').getAttribute('data-name')); });
+    });
+  });
+
+  // Лайтбокс
+  var lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), cap=lb.querySelector('figcaption');
+  var list=[], cur=0, title='', lastFocus=null;
+  function show(){ var im=list[cur]; lbImg.src=im.getAttribute('src'); lbImg.alt=im.alt; cap.textContent=title+' · '+(cur+1)+' / '+list.length; }
+  function openLb(imgs,i,t){ list=imgs; cur=i; title=t||''; lastFocus=document.activeElement; show(); lb.classList.add('open'); document.body.style.overflow='hidden'; lb.querySelector('.x').focus(); }
+  function closeLb(){ lb.classList.remove('open'); document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+  function step(d){ cur=(cur+d+list.length)%list.length; show(); }
+  lb.querySelector('.x').addEventListener('click', closeLb);
+  lb.querySelector('.l').addEventListener('click', function(e){ e.stopPropagation(); step(-1); });
+  lb.querySelector('.r').addEventListener('click', function(e){ e.stopPropagation(); step(1); });
+  lb.addEventListener('click', function(e){ if(e.target===lb || e.target.tagName==='FIGURE') closeLb(); });
+  document.addEventListener('keydown', function(e){ if(!lb.classList.contains('open')) return; if(e.key==='Escape') closeLb(); if(e.key==='ArrowLeft') step(-1); if(e.key==='ArrowRight') step(1); });
+  var sx=null; lb.addEventListener('touchstart', function(e){ sx=e.touches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', function(e){ if(sx===null) return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50) step(dx<0?1:-1); sx=null; });
+})();
+</script>
+
+<script type="module">
+// Framer Motion (motion) — только микроанимации hover/tap, видимость контента от него не зависит
+(async () => {
+  try {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const { animate } = await import("https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm");
+    document.querySelectorAll('.btn, .cbtn').forEach(el => {
+      el.addEventListener('pointerenter', () => animate(el, { scale: 1.03 }, { duration: .18 }));
+      el.addEventListener('pointerleave', () => animate(el, { scale: 1 }, { duration: .18 }));
+      el.addEventListener('pointerdown', () => animate(el, { scale: .96 }, { duration: .1 }));
+      el.addEventListener('pointerup', () => animate(el, { scale: 1.03 }, { duration: .12 }));
+    });
+    const st = document.querySelector('.sticker');
+    if (st) {
+      st.addEventListener('pointerenter', () => animate(st, { rotate: [-6, 6, -3, -6], scale: [1, 1.08, 1] }, { duration: .7 }));
+      st.addEventListener('pointerdown', () => animate(st, { rotate: [-6, 8, -6], scale: [1, 1.12, 1] }, { duration: .5 }));
+    }
+  } catch (e) { /* без анимаций страница работает так же */ }
+})();
+</script>
+</body>
+</html>
